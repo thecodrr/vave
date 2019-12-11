@@ -1,4 +1,4 @@
-module wav
+module vave
 
 const (
 	WAV_RIFF_CHUNK_ID = 'RIFF'.str

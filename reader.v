@@ -1,4 +1,4 @@
-module wav
+module vave
 
 //TODO implement different reading functions like mono, stereo etc.
 

@@ -1,4 +1,4 @@
-module wav
+module vave
 
 fn (w &WavFile) read_bytes(buf voidptr, len int) bool {
 	return C.fread(buf, len, 1, w.fp) == 1

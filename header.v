@@ -1,4 +1,4 @@
-module wav
+module vave
 
 struct WavMasterChunk {
 	mut:

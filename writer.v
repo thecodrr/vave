@@ -1,3 +1,3 @@
-module wav
+module vave
 
 //TODO
