@@ -16,7 +16,7 @@ Install using `vpkg`
 vpkg get https://github.com/thecodrr/vave
 ```
 
-Install using `V`'s builtin `vpm` (you will need to import the module with: `import thecodrr.boxx` with this method of installation):
+Install using `V`'s builtin `vpm` (you will need to import the module with: `import thecodrr.vave` with this method of installation):
 
 ```shell
 v install thecodrr.vave
@@ -131,7 +131,7 @@ Currently only the following formats are supported:
 
 ### Find this library useful? :heart:
 
-Support it by joining **[stargazers](https://github.com/thecodrr/boxx/stargazers)** for this repository. :star:or [buy me a cup of coffee](https://ko-fi.com/thecodrr)
+Support it by joining **[stargazers](https://github.com/thecodrr/vave/stargazers)** for this repository. :star:or [buy me a cup of coffee](https://ko-fi.com/thecodrr)
 And **[follow](https://github.com/thecodrr)** me for my next creations! 🤩
 
 # License
