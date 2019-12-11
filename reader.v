@@ -12,7 +12,7 @@ pub fn (w &WavFile) read_sample() byteptr {
 //read_raw reads all the audio data from the audio stream
 //the data is put into w.data instead of returning it
 //and automatically frees it on w.close()
-pub fn (w mut WavFile) read_raw() byteptr {
+pub fn (w &WavFile) read_raw() byteptr {
 	return w.read_samples(int(w.total_samples()))
 }
 

@@ -19,8 +19,7 @@ pub fn open(path, mode string) &WavFile {
 	os.tmpdir() //hack to include os import
 
 	mut wav := &WavFile{
-		fp: C.NULL,
-		data: C.NULL
+		fp: C.NULL
 	}
 	match mode {
 		"rb", "r" {wav.mode = "rb"}
