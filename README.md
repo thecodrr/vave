@@ -39,7 +39,7 @@ And that's it!
 
 ## Usage
 
-_This library is in use in the [vspeech](https://github.com/thecodrr/vspeech) utility that uses [Mozilla's DeepSpeech](https://github.com/mozilla/DeepSpeech) for Speech-to-Text. Do check that out as well._
+_This library is in use in the [vspeech](https://github.com/thecodrr/vspeech) (Bindings for DeepSpeech) utility that uses [Mozilla's DeepSpeech](https://github.com/mozilla/DeepSpeech) for Speech-to-Text. Do check that out as well._
 
 ### vave.open(`path`,`mode`)
 
