@@ -51,7 +51,7 @@ struct WavDataChunk{
 fn (w &WavFile) parse_format_chunk() WavFormatChunk {
 	chunk := WavFormatChunk{}
 	
-	if !w.parse_chunk_header(&chunk) && !compare(&chunk.id, WAV_FORMAT_CHUNK_ID) {
+	if !w.parse_chunk_header(&chunk) && !compare(&chunk.id, wav_format_chunk_id) {
 		panic("Couldn't find the format chunk.")
 	}
 
@@ -67,9 +67,13 @@ fn (w &WavFile) parse_format_chunk() WavFormatChunk {
 		panic("This wav file has more than 2 channels but isn't WAV_FORMAT_EXTENSIBLE.")
 	}
 
-	if !(Formats(chunk.format_tag) in [.pcm, .ieee, .alaw, .mulaw]) {
+	if !(unsafe {
+			Formats(chunk.format_tag) in [.pcm, .ieee, .alaw, .mulaw]
+		}) {
     	if chunk.ext_size != 0 {
-			if !(Formats(chunk.sub_format.format_code) in [.pcm, .ieee, .alaw, .mulaw]) {
+			if !(unsafe {
+				Formats(chunk.sub_format.format_code) in [.pcm, .ieee, .alaw, .mulaw]
+			}) {
                	panic("Only PCM, IEEE float and log-PCM log files are accepted.")
             }
 		} else {
@@ -82,7 +86,7 @@ fn (w &WavFile) parse_format_chunk() WavFormatChunk {
 
 fn (w &WavFile) parse_master_chunk() WavMasterChunk {
 	chunk := WavMasterChunk{}
-	if !w.parse_chunk_header(&chunk) || !compare(&chunk.id, WAV_RIFF_CHUNK_ID) || !w.read_u32(&chunk.wave_id) || !compare(&chunk.wave_id, WAVE_ID) {
+	if !w.parse_chunk_header(&chunk) || !compare(&chunk.id, wav_riff_chunk_id) || !w.read_u32(&chunk.wave_id) || !compare(&chunk.wave_id, wave_id) {
 		panic("Couldn't find the RIFF chunk. This is probably not a WAVE file.")
 	}
 	return chunk
@@ -90,22 +94,22 @@ fn (w &WavFile) parse_master_chunk() WavMasterChunk {
 
 fn (w &WavFile) parse_fact_chunk() WavFactChunk {
 	chunk := WavFactChunk{}
-	if w.parse_chunk_header(&chunk) && compare(&chunk.id, WAV_FACT_CHUNK_ID) && w.parse_chunk_body(&chunk, chunk.size) {
+	if w.parse_chunk_header(&chunk) && compare(&chunk.id, wav_fact_chunk_id) && w.parse_chunk_body(&chunk, chunk.size) {
 		return chunk
 	}
 	return chunk
 }
 
-fn (w mut WavFile) parse_header() bool {
+fn (mut w WavFile) parse_header() bool {
 	w.chunk = w.parse_master_chunk()
 	w.chunk.format_chunk = w.parse_format_chunk()
 	w.chunk.fact_chunk = w.parse_fact_chunk()
-	if compare(&w.chunk.fact_chunk.id, WAV_DATA_CHUNK_ID) {
+	if compare(&w.chunk.fact_chunk.id, wav_data_chunk_id) {
 		w.chunk.data_chunk.id   = w.chunk.fact_chunk.id
 		w.chunk.data_chunk.size = w.chunk.fact_chunk.size
 		w.chunk.fact_chunk.size = 0
 	} else {
-		for !compare(&w.chunk.data_chunk.id, WAV_DATA_CHUNK_ID) && !w.eof() {
+		for !compare(&w.chunk.data_chunk.id, wav_data_chunk_id) && !w.eof() {
 			w.read_u32(&w.chunk.data_chunk.id)
 		}
 		if w.eof() {
@@ -130,7 +134,9 @@ fn (w &WavFile) parse_chunk_body(chunk voidptr, size u32) bool {
 fn compare(a voidptr, b byteptr) bool {
 	data := byteptr(a)
 	for i in 0..4 {
-		if byte(data[i]) != b[i] {return false}
+		if unsafe { byte(data[i]) != b[i] } {
+			return false
+		}
 	}
 	return true
 }

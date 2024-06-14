@@ -13,7 +13,7 @@ fn (w &WavFile) read_u16(buf voidptr) bool {
 }
 
 fn (w &WavFile) read_into_struct(c voidptr, skip int, size u32) bool {
-	return w.read_bytes(*byte(c) + skip, int(size))
+	return w.read_bytes(unsafe { voidptr(int(c) + skip) }, int(size))
 }
 
 /* fn (w &WavFile) pos() i64 {
@@ -28,5 +28,5 @@ fn (w &WavFile) read_into_struct(c voidptr, skip int, size u32) bool {
 } */
 
 fn (w &WavFile) eof() bool {
-    return feof(w.fp) > -1 || ftell(w.fp) == int(w.get_header_size() + w.chunk.data_chunk.size)
+	return C.feof(w.fp) > -1 || C.ftell(w.fp) == int(w.get_header_size() + w.chunk.data_chunk.size)
 }
