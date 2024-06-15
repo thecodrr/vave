@@ -10,12 +10,6 @@ A crazy simple library for reading/writing WAV files written in V!
 
 ## Installation:
 
-Install using `vpkg`
-
-```bash
-vpkg get https://github.com/thecodrr/vave
-```
-
 Install using `V`'s builtin `vpm` (you will need to import the module with: `import thecodrr.vave` with this method of installation):
 
 ```shell
