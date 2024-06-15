@@ -10,12 +10,6 @@ A crazy simple library for reading/writing WAV files written in V!
 
 ## Installation:
 
-Install using `vpkg`
-
-```bash
-vpkg get https://github.com/thecodrr/vave
-```
-
 Install using `V`'s builtin `vpm` (you will need to import the module with: `import thecodrr.vave` with this method of installation):
 
 ```shell
@@ -140,6 +134,7 @@ And **[follow](https://github.com/thecodrr)** me for my next creations! 🤩
 MIT License
 
 Copyright (c) 2019 Abdullah Atta
+Copyright (c) 2024 Karol Zimmer
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

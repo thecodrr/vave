@@ -1,19 +1,18 @@
 module vave
 
-const (
-	WAV_RIFF_CHUNK_ID = 'RIFF'.str
-	WAV_FORMAT_CHUNK_ID = 'fmt '.str
-	WAV_FACT_CHUNK_ID = 'fact'.str
-	WAV_DATA_CHUNK_ID = 'data'.str
-	WAVE_ID = 'WAVE'.str
-	WAV_RIFF_HEADER_SIZE = u32(8)
-	DEFAULT_SUB_FORMAT = [0x00, 0x00, 0x00, 0x00, 0x10, 0x00, 0x80, 0x00, 0x00, 0xaa, 0x00, 0x38, 0x9b, 0x71]
-)
+const wav_riff_chunk_id = 'RIFF'.str
+const wav_format_chunk_id = 'fmt '.str
+const wav_fact_chunk_id = 'fact'.str
+const wav_data_chunk_id = 'data'.str
+const wave_id = 'WAVE'.str
+const wav_riff_header_size = u32(8)
+const default_sub_format = [0x00, 0x00, 0x00, 0x00, 0x10, 0x00, 0x80, 0x00, 0x00, 0xaa, 0x00, 0x38,
+	0x9b, 0x71]
 
 pub enum Formats {
-	pcm = 0x0001,
-	ieee = 0x0003,
-	alaw = 0x0006,
-	mulaw = 0x0007,
+	pcm        = 0x0001
+	ieee       = 0x0003
+	alaw       = 0x0006
+	mulaw      = 0x0007
 	extensible = 0xfffe
 }
